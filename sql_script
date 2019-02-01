@@ -1,0 +1,61 @@
+INSTALL  MYSQL SERVER
+Linux commands:
+--------------------------------------------------
+>sudo apt -get update
+>sudo apt -get install mysql-server
+
+NOTE
+user:root
+password:root
+---------------------------------------------------
+HOW TO START MYSQL IN LINUX
+
+>systemctl start mysql
+>mysql -u root -p
+
+mysql>use myapp 
+
+
+1)SQL SCRIPT TO CREATE DB.
+
+mysql>CREATE DATABASE MYAPP;
+
+2)SQL SCRIPT TO CREATE JOB TABLE.
+
+mysql>CREATE TABLE job (id bigint(20) NOT NULL AUTO_INCREMENT,title VARCHAR(255) NOT NULL, company VARCHAR(255),location VARCHAR(255), skills VARCHAR(255) NOT NULL, jhi_desc VARCHAR(255) NOT NULL, worktype VARCHAR(255) NOT NULL, jhi_online bit(1), tele bit(1), ftf bit(1), hr bit(1), psychometric bit(1),PRIMARY KEY (id));
+------------------------------------------------------
+mysql>CREATE TABLE skillset (id bigint(20) NOT NULL AUTO_INCREMENT,skill VARCHAR(255), PRIMARY KEY (id));
+
+mysql> describe skillset;
+
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | bigint(20)   | NO   | PRI | NULL    | auto_increment |
+| skill | varchar(255) | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+
+
+mysql>ALTER TABLE job ADD desiredskills VARCHAR(255);
+
+------------------------------------------------------------------------------------------
+
+table applicant
+
++---------------------+--------------+------+-----+---------+----------------+
+| Field               | Type         | Null | Key | Default | Extra          				|
++---------------------+--------------+------+-----+---------+----------------+
+| id                  		| bigint(20)  		 | NO   | PRI | NULL    | auto_increment |
+| name                		| varchar(50)  	| NO   |     | NULL    |                		|
+| email               		| varchar(255) 	| NO   |     | NULL    |                		|
+| resume              		| longblob     	| NO   |     | NULL    |                		|
+| resume_content_type | varchar(255) 	| NO   |     | NULL    |                		|
+| phone               		| varchar(255) 	| NO   |     | NULL    |                		|
+| job_id              		| bigint(20)  		 | YES  | MUL | NULL    |                	|
++---------------------+--------------+------+-----+---------+----------------+
+
+
+
+
+
+
