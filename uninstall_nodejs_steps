@@ -1,0 +1,13 @@
+HOW TO UNINSTALL NODEJS
+
+To manually remove node js, npm and  node_modules from Ubuntu,  you need to do the following steps.
+
+>sudo rm -rf /usr/local/bin/npm /usr/local/share/man/man1/node* /usr/local/lib/dtrace/node.d ~/.npm ~/.node-gyp /opt/local/bin/node opt/local/include/node /opt/local/lib/node_modules 
+
+>sudo rm -rf /usr/local/lib/node*
+
+>sudo rm -rf /usr/local/include/node* 
+
+>sudo rm -rf /usr/local/bin/node*
+
+ Go to home directory and remove any node or node_modules directory, if exists. 

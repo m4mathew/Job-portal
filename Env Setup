@@ -1,0 +1,61 @@
+INSTALL NODE.JS
+Linux commands:
+
+>sudo apt-get update
+>sudo apt-get install nodejs
+>sudo apt-get install npm
+
+To check which version of Node.js you have installed after these initial steps, type:
+
+>nodejs -v
+
+Execute this command to verify that npm is installed:
+
+>npm -v
+---------------------------------------------------
+INSTALL  MYSQL SERVER
+Linux commands:
+
+>sudo apt -get update
+>sudo apt -get install mysql-server
+
+NOTE
+user:root
+password:root
+
+START MYSQL IN UNIX
+>systemctl start mysql
+>mysql -u root -p
+
+USEFUL MYSQL COMMANDS
+sql>show databases;
+sql> create database db_name;
+sql>use db_name;
+sql> drop database db_name;
+
+---------------------------------------------------
+TO SEE DATASOURCE CONFIGURATION
+
+Open  application-dev.yml  in myapp/src/main/resources/config 
+
+ datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/myapp?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: root
+        password: root
+---------------------------------------------------
+TO BUILD
+
+go to Application folder
+>cd myapplication
+
+on Linux run
+>./mvnw -Pdev,webpack 
+
+(on Windows try)
+>mvnw -Pdev,webpack 
+
+The application will be available on http://localhost:8080
+
+--------------------------------------------------
+
