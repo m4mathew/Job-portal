@@ -1,0 +1,74 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "company",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "skills",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "worktype",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "online",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "tele",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "ftf",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hr",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "psychometric",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "desiredskills",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20181218162437",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "job",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

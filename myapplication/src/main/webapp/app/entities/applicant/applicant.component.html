@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Applicants</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-applicant" [routerLink]="['/applicant/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Applicant
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="applicants">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Email</span></th>
+            <th><span>Resume</span></th>
+            <th><span>Phone</span></th>
+            <th><span>Job</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let applicant of applicants ;trackBy: trackId">
+                <td><a [routerLink]="['/applicant', applicant.id, 'view' ]">{{applicant.id}}</a></td>
+                <td>{{applicant.name}}</td>
+                <td>{{applicant.email}}</td>
+                <td>
+                    <a *ngIf="applicant.resume" (click)="openFile(applicant.resumeContentType, applicant.resume)">open</a>
+                    <span *ngIf="applicant.resume">{{applicant.resumeContentType}}, {{byteSize(applicant.resume)}}</span>
+                </td>
+                <td>{{applicant.phone}}</td>
+                <td>
+                    <div *ngIf="applicant.job">
+                        <a [routerLink]="['../job', applicant.job?.id, 'view' ]" >{{applicant.job?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/applicant', applicant.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/applicant', applicant.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'applicant/'+ applicant.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

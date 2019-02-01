@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="job">
+            <h2><span>Job</span> {{job.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{job.title}}</span>
+                </dd>
+                <dt><span>Company</span></dt>
+                <dd>
+                    <span>{{job.company}}</span>
+                </dd>
+                <dt><span>Location</span></dt>
+                <dd>
+                    <span>{{job.location}}</span>
+                </dd>
+                <dt><span>Skills</span></dt>
+                <dd>
+                    <span>{{job.skills}}</span>
+                </dd>
+                <dt><span>Desc</span></dt>
+                <dd>
+                    <span>{{job.desc}}</span>
+                </dd>
+                <dt><span>Worktype</span></dt>
+                <dd>
+                    <span>{{job.worktype}}</span>
+                </dd>
+                <dt><span>Online</span></dt>
+                <dd>
+                    <span>{{job.online}}</span>
+                </dd>
+                <dt><span>Tele</span></dt>
+                <dd>
+                    <span>{{job.tele}}</span>
+                </dd>
+                <dt><span>Ftf</span></dt>
+                <dd>
+                    <span>{{job.ftf}}</span>
+                </dd>
+                <dt><span>Hr</span></dt>
+                <dd>
+                    <span>{{job.hr}}</span>
+                </dd>
+                <dt><span>Psychometric</span></dt>
+                <dd>
+                    <span>{{job.psychometric}}</span>
+                </dd>
+                <dt><span>Desiredskills</span></dt>
+                <dd>
+                    <span>{{job.desiredskills}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job', job.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

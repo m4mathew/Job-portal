@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicant">
+            <h2><span>Applicant</span> {{applicant.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{applicant.name}}</span>
+                </dd>
+                <dt><span>Email</span></dt>
+                <dd>
+                    <span>{{applicant.email}}</span>
+                </dd>
+                <dt><span>Resume</span></dt>
+                <dd>
+                    <div *ngIf="applicant.resume">
+                        <a (click)="openFile(applicant.resumeContentType, applicant.resume)">open</a>
+                        {{applicant.resumeContentType}}, {{byteSize(applicant.resume)}}
+                    </div>
+                </dd>
+                <dt><span>Phone</span></dt>
+                <dd>
+                    <span>{{applicant.phone}}</span>
+                </dd>
+                <dt><span>Job</span></dt>
+                <dd>
+                    <div *ngIf="applicant.job">
+                        <a [routerLink]="['/job', applicant.job?.id, 'view']">{{applicant.job?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/applicant', applicant.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

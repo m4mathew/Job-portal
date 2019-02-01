@@ -1,0 +1,156 @@
+
+  <div >
+    <div>
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm" autocomplete="off">
+            <h5 id="jhi-job-heading">Create or edit a Job</h5>
+            
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!job.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="job.id" readonly />
+                </div>
+          <div *ngIf="page1" >
+                <div  class="col-6">
+                     <input class="form-control" type="text"  name="title" id="field_title"
+                        [(ngModel)]="job.title" required placeholder="Job Title"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <br>
+                <div  class="col-6">
+                    
+                    <input type="text" class="form-control" name="company" id="field_company"
+                        [(ngModel)]="job.company" placeholder="Company"/>
+                </div>
+                <br>
+                <div class="col-6">
+                    <input type="text" class="form-control" name="location" id="field_location"
+                        [(ngModel)]="job.location" placeholder="Location"/>
+                </div>
+                <br>
+                <button (click)="toggle(1)"  style="background-color: #7990ad; color: white; padding: 12px 34px;text-align: center; display: inline-block;font-size: 16px;  margin: 4px 2px;"> 
+                Next  </button>
+          </div>
+         
+          
+          <div *ngIf="page2" >
+                <div class="col-6">
+                   Required Skills:
+                   <table style="border-spacing: 5px">
+                    	<tr ><td *ngFor="let savedItem of savedSkillsArry" style="border:1px solid black;cursor: pointer" 
+                    			(click)="removeSkill(savedItem)"><font size="2">{{savedItem}}	
+                    												&nbsp;x</font></td>
+                    	</tr>
+                    </table>
+                    
+                                       
+                  </div> 
+                  <div class="col-3">
+                    <input type="text" class="form-control" name="multiselectskill" id="multiselectskill"
+                    [(ngModel)]="skill"  placeholder="Choose Skill" />
+                    <table>
+                    <tr  *ngFor="let item of skillsets" > 
+                    <td *ngIf="skill && item.skill.toLowerCase().startsWith(skill.toLowerCase())">
+                    <a  (click)="addSkill(item.skill)">{{item.skill}} </a> <td>
+                    </tr></table>
+                    
+                  </div> 
+                   
+                  <div class="col-6">
+                   Desired Skills:
+                   <table style="border-spacing: 5px">
+                    	<tr ><td *ngFor="let savedItem of savedDesiredskillsArry" style="border:1px solid black;cursor: pointer" 
+                    			(click)="removeDesiredSkill(savedItem)"><font size="2">{{savedItem}}	
+                    												&nbsp;x</font></td>
+                    	</tr>
+                    </table>
+                    
+                                       
+                  </div> 
+                  <div class="col-3">
+                    <input type="text" class="form-control" name="multiselectdesiredskill" id="multiselectdesiredskill"
+                    [(ngModel)]="desiredskill"  placeholder="Choose Skill" />
+                    <table>
+                    <tr  *ngFor="let item of skillsets" > 
+                    <td *ngIf="desiredskill && item.skill.toLowerCase().startsWith(desiredskill.toLowerCase()) && savedSkillsArry.indexOf(item.skill)<0">
+                    <a  (click)="addDesiredSkill(item.skill)">{{item.skill}} </a> <td>
+                    </tr></table>
+                    
+                  </div>  
+               
+                <div class="col-6">
+                    <label  for="field_desc">Job Description</label>
+                    <textarea class="form-control" name="desc" id="field_desc"
+                        [(ngModel)]="job.desc" required>
+                    </textarea>
+                    <div [hidden]="!(editForm.controls.desc?.dirty && editForm.controls.desc?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.desc?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <br>
+                <div  class="col-3">
+                    <label for="field_worktype">Employment Type</label>
+                    <select class="form-control" name="worktype" id="field_worktype"
+                        [(ngModel)]="job.worktype" required>
+                    <option *ngFor="let wrkType of workTypeArray"   value="{{wrkType}}"> {{wrkType}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.worktype?.dirty && editForm.controls.worktype?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.worktype?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <br>
+                <button (click)="toggle(0)"  style="background-color: #7990ad; color: white; padding: 11px 34px;text-align: center; display: inline-block;font-size: 16px;"> 
+                Prev  </button>
+                <button (click)="toggle(2)"  style="background-color: #7990ad; color: white; padding: 11px 34px;text-align: center; display: inline-block;font-size: 16px;"> 
+                Next  </button>
+            </div>    
+               
+            <div *ngIf="page3" >     
+                <div col-6>
+                <br>
+	                 <input type="checkbox" name="online" id="field_online"
+		                [(ngModel)]="job.online"/>Online &nbsp;&nbsp;
+		               <input type="checkbox"  name="tele" id="field_tele"
+		                [(ngModel)]="job.tele" />Telephonic &nbsp;&nbsp;
+		                		  <input type="checkbox" name="ftf" id="field_ftf"
+		                [(ngModel)]="job.ftf" />Face to face &nbsp;&nbsp;
+		           
+		                <input type="checkbox"  name="hr" id="field_hr"
+		                [(ngModel)]="job.hr" />HR &nbsp;&nbsp;
+		                		
+		                <input type="checkbox" name="psychometric" id="field_psychometric"
+		                [(ngModel)]="job.psychometric" />Psychometric &nbsp;&nbsp;
+		          <br>
+		          <br>
+		          <button (click)="toggle(3)"  style="background-color: #7990ad; color: white; padding: 11px 34px;text-align: center; display: inline-block;font-size: 16px;"> 
+	                Prev  </button>
+	                <br>
+	                <br>
+                </div>
+            </div>
+            <div  *ngIf="page3">
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+            
+            </div>
+            
+        </form>
+    </div>
+</div>

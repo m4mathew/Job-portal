@@ -1,0 +1,104 @@
+<div >
+    <div >
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h5 id="jhi-applicant-heading">Create or edit a Applicant</h5>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!applicant.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="applicant.id" readonly />
+                </div>
+                 <div  class="col-6">
+                    Job Id(*of existing Jobs created)
+                    <select class="form-control" id="field_job" name="job" [(ngModel)]="applicant.job" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobOption.id === applicant.job?.id ? applicant.job : jobOption" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.id}}</option>
+                    </select>
+                </div>
+                <br>
+                 <div  class="col-6">
+                    <input type="text" class="form-control" name="name" id="field_name" placeholder="Full Name"
+                        [(ngModel)]="applicant.name" required maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <br>
+                 <div  class="col-6">
+                       <input type="text" class="form-control" name="email" id="field_email" placeholder="Email"
+                        [(ngModel)]="applicant.email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern">
+                            This field should follow pattern for "Email".
+                        </small>
+                    </div>
+                </div>
+                <br>
+                <div  class="col-6">
+                   
+                    <input type="text" class="form-control" name="phone" id="field_phone" placeholder="Phone Number"
+                        [(ngModel)]="applicant.phone" required pattern="[0-9 ]+"/>
+                    <div [hidden]="!(editForm.controls.phone?.dirty && editForm.controls.phone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.phone?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.phone?.errors?.pattern">
+                            This field should follow pattern for "Phone Number".
+                        </small>
+                    </div>
+                </div>
+                <br>
+                 <div  class="col-6">
+                    <label class="form-control-label" for="field_resume">Upload	Resume</label>
+                    <div>
+                        <div *ngIf="applicant.resume" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(applicant.resumeContentType, applicant.resume)">open</a><br>
+                            <span class="pull-left">{{applicant.resumeContentType}}, {{byteSize(applicant.resume)}}</span>
+                            <button type="button" (click)="applicant.resume=null;applicant.resumeContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_resume" (change)="setFileData($event, applicant, 'resume', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="resume" id="field_resume"
+                        [(ngModel)]="applicant.resume" required/>
+                    <input type="hidden" class="form-control" name="resumeContentType" id="field_resumeContentType"
+                        [(ngModel)]="applicant.resumeContentType" />
+                    <div [hidden]="!(editForm.controls.resume?.dirty && editForm.controls.resume?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resume?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                 
+<br><br>
+                
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
